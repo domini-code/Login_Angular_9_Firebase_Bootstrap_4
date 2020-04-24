@@ -1,0 +1,18 @@
+{
+  "targets": {
+    "loginapp-fc008": {
+      "hosting": {
+        "login": [
+          "loginapp-fc008"
+        ]
+      }
+    },
+    "login-ng-b97ae": {
+      "hosting": {
+        "login": [
+          "login-ng-b97ae"
+        ]
+      }
+    }
+  }
+}
