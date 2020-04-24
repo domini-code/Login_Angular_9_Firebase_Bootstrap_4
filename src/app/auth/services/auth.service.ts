@@ -6,6 +6,10 @@ import { AngularFireAuth } from '@angular/fire/auth';
 export class AuthService {
   constructor(public afAuth: AngularFireAuth) {}
 
+  async sendVerificationEmail(): Promise<void> {
+    return (await this.afAuth.currentUser).sendEmailVerification();
+  }
+
   async login(email: string, password: string) {
     try {
       const result = await this.afAuth.signInWithEmailAndPassword(
@@ -24,6 +28,7 @@ export class AuthService {
         email,
         password
       );
+      await this.sendVerificationEmail();
       return result;
     } catch (error) {
       console.log(error);
