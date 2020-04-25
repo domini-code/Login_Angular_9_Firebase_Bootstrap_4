@@ -1,6 +1,7 @@
 import { AuthService } from './../services/auth.service';
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
+import { User } from 'src/app/shared/models/user.interface';
 
 @Component({
   selector: 'app-send-email',
@@ -9,7 +10,7 @@ import { Observable } from 'rxjs';
   providers: [AuthService],
 })
 export class SendEmailComponent {
-  public user$: Observable<any> = this.authSvc.afAuth.user;
+  public user$: Observable<User> = this.authSvc.afAuth.user;
 
   constructor(private authSvc: AuthService) {}
 

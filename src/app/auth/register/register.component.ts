@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 
 import { AuthService } from './../services/auth.service';
@@ -9,15 +9,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./register.component.scss'],
   providers: [AuthService],
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent {
   registerForm = new FormGroup({
     email: new FormControl(''),
     password: new FormControl(''),
   });
 
   constructor(private authSvc: AuthService, private router: Router) {}
-
-  ngOnInit(): void {}
 
   async onRegister() {
     const { email, password } = this.registerForm.value;

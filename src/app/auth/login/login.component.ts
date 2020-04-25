@@ -1,5 +1,5 @@
 import { FormGroup, FormControl } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { AuthService } from './../services/auth.service';
 import { Router } from '@angular/router';
@@ -9,14 +9,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.scss'],
   providers: [AuthService],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   loginForm = new FormGroup({
     email: new FormControl(''),
     password: new FormControl(''),
   });
   constructor(private authSvc: AuthService, private router: Router) {}
-
-  ngOnInit(): void {}
 
   async onLogin() {
     const { email, password } = this.loginForm.value;

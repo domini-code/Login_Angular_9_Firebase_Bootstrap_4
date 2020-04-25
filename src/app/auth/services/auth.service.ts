@@ -1,4 +1,3 @@
-import { first } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 
@@ -6,11 +5,19 @@ import { AngularFireAuth } from '@angular/fire/auth';
 export class AuthService {
   constructor(public afAuth: AngularFireAuth) {}
 
+  async resetPassword(email: string): Promise<void> {
+    try {
+      return this.afAuth.sendPasswordResetEmail(email);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   async sendVerificationEmail(): Promise<void> {
     return (await this.afAuth.currentUser).sendEmailVerification();
   }
 
-  async login(email: string, password: string) {
+  async login(email: string, password: string): Promise<any> {
     try {
       const result = await this.afAuth.signInWithEmailAndPassword(
         email,
@@ -22,7 +29,7 @@ export class AuthService {
     }
   }
 
-  async register(email: string, password: string) {
+  async register(email: string, password: string): Promise<any> {
     try {
       const result = await this.afAuth.createUserWithEmailAndPassword(
         email,
@@ -35,7 +42,7 @@ export class AuthService {
     }
   }
 
-  async logout() {
+  async logout(): Promise<void> {
     try {
       await this.afAuth.signOut();
     } catch (error) {
