@@ -1,7 +1,7 @@
-import { AuthService } from './../services/auth.service';
+import { AuthService } from '@auth/services/auth.service';
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
-import { User } from 'src/app/shared/models/user.interface';
+import { User } from '@shared/models/user.interface';
 
 @Component({
   selector: 'app-send-email',

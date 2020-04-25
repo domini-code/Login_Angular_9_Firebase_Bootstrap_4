@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
-import { AuthService } from './../../auth/services/auth.service';
+import { AuthService } from '@auth/services/auth.service';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
