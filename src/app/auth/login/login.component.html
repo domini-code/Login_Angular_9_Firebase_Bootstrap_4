@@ -21,6 +21,11 @@
           </button>
         </form>
         <div class="form-group mt-3">
+          <button (click)="onGoogleLogin()" class="btn btn-lg btn-google">
+            Google
+          </button>
+        </div>
+        <div class="form-group mt-3">
           <p>
             Create an account ? <a [routerLink]="['/register']"> Register </a>
           </p>
