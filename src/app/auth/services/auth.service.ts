@@ -26,9 +26,13 @@ export class AuthService extends RoleValidator {
     );
   }
 
-  async loginGoogle() {
+  async loginGoogle(): Promise<User> {
     try {
-      return this.afAuth.signInWithPopup(new auth.GoogleAuthProvider());
+      const { user } = await this.afAuth.signInWithPopup(
+        new auth.GoogleAuthProvider()
+      );
+      this.updateUserData(user);
+      return user;
     } catch (error) {
       console.log(error);
     }
@@ -91,7 +95,7 @@ export class AuthService extends RoleValidator {
       emailVerified: user.emailVerified,
       displayName: user.displayName,
       photoURL: user.photoURL,
-      role: 'EDITOR',
+      role: 'ADMIN',
     };
 
     return userRef.set(data, { merge: true });

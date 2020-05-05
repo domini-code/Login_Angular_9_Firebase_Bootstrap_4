@@ -27,7 +27,7 @@ export class LoginComponent {
     const { email, password } = this.loginForm.value;
     try {
       const user = await this.authSvc.login(email, password);
-      if (user && user.user.emailVerified) {
+      if (user && user.emailVerified) {
         this.router.navigate(['/home']);
       } else if (user) {
         this.router.navigate(['/verification-email']);

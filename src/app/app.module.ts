@@ -12,6 +12,11 @@ import { AngularFireModule } from '@angular/fire';
 import { SendEmailComponent } from './auth/send-email/send-email.component';
 
 import { AuthService } from '@auth/services/auth.service';
+
+import { CanSuscriptorGuard } from '@app/auth/guards/can-suscriptor.guard';
+import { CanAdminGuard } from '@auth/guards/can-admin.guard';
+import { CanEditGuard } from '@auth/guards/can-edit.guard';
+
 @NgModule({
   declarations: [AppComponent, NavbarComponent, SendEmailComponent],
   imports: [
@@ -21,7 +26,7 @@ import { AuthService } from '@auth/services/auth.service';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
   ],
-  providers: [AuthService],
+  providers: [AuthService, CanEditGuard, CanAdminGuard, CanSuscriptorGuard],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

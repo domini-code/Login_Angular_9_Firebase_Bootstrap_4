@@ -1,3 +1,6 @@
+import { CanAdminGuard } from '@auth/guards/can-admin.guard';
+import { CanSuscriptorGuard } from '@auth/guards/can-suscriptor.guard';
+import { CanEditGuard } from '@auth/guards/can-edit.guard';
 import { SendEmailComponent } from '@auth/send-email/send-email.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -33,9 +36,24 @@ const routes: Routes = [
         (m) => m.ForgotPasswordModule
       ),
   },
-  { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) },
-  { path: 'editor', loadChildren: () => import('./editor/editor.module').then(m => m.EditorModule) },
-  { path: 'suscriptor', loadChildren: () => import('./suscriptor/suscriptor.module').then(m => m.SuscriptorModule) },
+  {
+    path: 'admin',
+    loadChildren: () =>
+      import('./admin/admin.module').then((m) => m.AdminModule),
+    canActivate: [CanAdminGuard],
+  },
+  {
+    path: 'editor',
+    loadChildren: () =>
+      import('./editor/editor.module').then((m) => m.EditorModule),
+    canActivate: [CanEditGuard],
+  },
+  {
+    path: 'suscriptor',
+    loadChildren: () =>
+      import('./suscriptor/suscriptor.module').then((m) => m.SuscriptorModule),
+    canActivate: [CanSuscriptorGuard],
+  },
 ];
 
 @NgModule({
