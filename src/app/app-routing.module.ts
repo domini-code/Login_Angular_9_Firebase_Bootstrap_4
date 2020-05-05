@@ -33,6 +33,9 @@ const routes: Routes = [
         (m) => m.ForgotPasswordModule
       ),
   },
+  { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) },
+  { path: 'editor', loadChildren: () => import('./editor/editor.module').then(m => m.EditorModule) },
+  { path: 'suscriptor', loadChildren: () => import('./suscriptor/suscriptor.module').then(m => m.SuscriptorModule) },
 ];
 
 @NgModule({
