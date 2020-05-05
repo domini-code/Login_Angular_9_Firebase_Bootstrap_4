@@ -7,7 +7,6 @@ import { User } from '@shared/models/user.interface';
   selector: 'app-send-email',
   templateUrl: './send-email.component.html',
   styleUrls: ['./send-email.component.scss'],
-  providers: [AuthService],
 })
 export class SendEmailComponent {
   public user$: Observable<User> = this.authSvc.afAuth.user;

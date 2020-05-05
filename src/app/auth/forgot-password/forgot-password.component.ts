@@ -7,7 +7,6 @@ import { Router } from '@angular/router';
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.component.html',
   styleUrls: ['./forgot-password.component.scss'],
-  providers: [AuthService],
 })
 export class ForgotPasswordComponent {
   userEmail = new FormControl('');

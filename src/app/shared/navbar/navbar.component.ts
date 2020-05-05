@@ -7,7 +7,6 @@ import { Router } from '@angular/router';
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
-  providers: [AuthService],
 })
 export class NavbarComponent {
   public user$: Observable<any> = this.authSvc.afAuth.user;
