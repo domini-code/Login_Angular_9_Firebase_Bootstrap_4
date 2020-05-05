@@ -1,9 +1,30 @@
+import { User } from '@shared/models/user.interface';
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase/app';
+import { Observable, of } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
+import {
+  AngularFirestore,
+  AngularFirestoreDocument,
+} from '@angular/fire/firestore';
+import { RoleValidator } from '@auth/helpers/roleValidator';
+
 @Injectable({ providedIn: 'root' })
-export class AuthService {
-  constructor(public afAuth: AngularFireAuth) {}
+export class AuthService extends RoleValidator {
+  public user$: Observable<User>;
+
+  constructor(public afAuth: AngularFireAuth, private afs: AngularFirestore) {
+    super();
+    this.user$ = this.afAuth.authState.pipe(
+      switchMap((user) => {
+        if (user) {
+          return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
+        }
+        return of(null);
+      })
+    );
+  }
 
   async loginGoogle() {
     try {
@@ -25,26 +46,27 @@ export class AuthService {
     return (await this.afAuth.currentUser).sendEmailVerification();
   }
 
-  async login(email: string, password: string): Promise<any> {
+  async login(email: string, password: string): Promise<User> {
     try {
-      const result = await this.afAuth.signInWithEmailAndPassword(
+      const { user } = await this.afAuth.signInWithEmailAndPassword(
         email,
         password
       );
-      return result;
+      this.updateUserData(user);
+      return user;
     } catch (error) {
       console.log(error);
     }
   }
 
-  async register(email: string, password: string): Promise<any> {
+  async register(email: string, password: string): Promise<User> {
     try {
-      const result = await this.afAuth.createUserWithEmailAndPassword(
+      const { user } = await this.afAuth.createUserWithEmailAndPassword(
         email,
         password
       );
       await this.sendVerificationEmail();
-      return result;
+      return user;
     } catch (error) {
       console.log(error);
     }
@@ -56,5 +78,22 @@ export class AuthService {
     } catch (error) {
       console.log(error);
     }
+  }
+
+  private updateUserData(user: User) {
+    const userRef: AngularFirestoreDocument<User> = this.afs.doc(
+      `users/${user.uid}`
+    );
+
+    const data: User = {
+      uid: user.uid,
+      email: user.email,
+      emailVerified: user.emailVerified,
+      displayName: user.displayName,
+      photoURL: user.photoURL,
+      role: 'EDITOR',
+    };
+
+    return userRef.set(data, { merge: true });
   }
 }
