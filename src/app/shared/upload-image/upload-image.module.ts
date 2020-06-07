@@ -3,10 +3,11 @@ import { CommonModule } from '@angular/common';
 
 import { UploadImageRoutingModule } from './upload-image-routing.module';
 import { UploadImageComponent } from './upload-image.component';
+import { NgDominicodeFilesDirective } from './directives/ng-dominicode-files.directive';
 
 
 @NgModule({
-  declarations: [UploadImageComponent],
+  declarations: [UploadImageComponent, NgDominicodeFilesDirective],
   imports: [
     CommonModule,
     UploadImageRoutingModule

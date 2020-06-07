@@ -1,1 +1,61 @@
-<p>upload-image works!</p>
+<div class="row">
+  <div class="col-md-4 mt-5">
+    <div class="card">
+      <div class="card-header">
+        <span>Files</span>
+      </div>
+      <div class="card-body">
+        <div class="drop-zone">
+          Drop-zone
+        </div>
+        <h4>Drop here your images</h4>
+        <img src="../../../assets/img/cloud.png" alt="drop-images" />
+      </div>
+    </div>
+  </div>
+  <div class="col-md-8 mt-5">
+    <div class="card">
+      <div class="card-header">
+        <h4>Files to Upload</h4>
+      </div>
+
+      <div class="card-body">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>File name</th>
+              <th>Size</th>
+              <th>Progress</th>
+              <th>URL</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>file.name</td>
+              <td>file.file.size</td>
+              <td>
+                file.uploadPercent
+                <div class="progress">
+                  <div class="progress-bar">
+                    role="progessbar" uploadPercent %
+                  </div>
+                </div>
+              </td>
+              <td>file.downloadURL</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="container-buttons">
+          <button (click)="files = []" class="btn btn-danger">Clean all</button>
+          <button
+            (click)="onUpload()"
+            [disabled]="files.length === 0"
+            class="btn btn-primary"
+          >
+            Upload
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
