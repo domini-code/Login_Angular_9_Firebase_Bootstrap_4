@@ -9,6 +9,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireModule } from '@angular/fire';
+import { AngularFireStorageModule, BUCKET } from '@angular/fire/storage';
 import { SendEmailComponent } from './auth/send-email/send-email.component';
 
 import { AuthService } from '@auth/services/auth.service';
@@ -25,8 +26,15 @@ import { CanEditGuard } from '@auth/guards/can-edit.guard';
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
+    AngularFireStorageModule,
   ],
-  providers: [AuthService, CanEditGuard, CanAdminGuard, CanSuscriptorGuard],
+  providers: [
+    AuthService,
+    CanEditGuard,
+    CanAdminGuard,
+    CanSuscriptorGuard,
+    { provide: BUCKET, useValue: 'gs://crud-7e0a7.appspot.com' },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
