@@ -6,8 +6,6 @@ export class RoleValidator {
   }
 
   isEditor(user: User): boolean {
-    console.log('user->', user);
-
     return user.role === 'EDITOR';
   }
 
