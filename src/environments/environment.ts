@@ -4,6 +4,15 @@
 
 export const environment = {
   production: false,
+  firebaseConfig: {
+    apiKey: 'AIzaSyBes9V0qwwoxGUPmesdO7pg8dbVNWDvAZM',
+    authDomain: 'dominicode-app.firebaseapp.com',
+    databaseURL: 'https://dominicode-app.firebaseio.com',
+    projectId: 'dominicode-app',
+    storageBucket: 'dominicode-app.appspot.com',
+    messagingSenderId: '168216554238',
+    appId: '1:168216554238:web:18d1416d222912a8',
+  },
 };
 
 /*
