@@ -5,11 +5,16 @@
         <span>Files</span>
       </div>
       <div class="card-body">
-        <div class="drop-zone">
-          Drop-zone
+        <div
+          appNgDominicodeFiles
+          [files]="files"
+          (mouseOver)="isOverDrop = $event"
+          [ngClass]="{ 'file-over': isOverDrop }"
+          class="drop-zone"
+        >
+          <h4>Drop here your images</h4>
+          <img src="../../../assets/img/cloud.png" alt="drop-images" />
         </div>
-        <h4>Drop here your images</h4>
-        <img src="../../../assets/img/cloud.png" alt="drop-images" />
       </div>
     </div>
   </div>
@@ -30,18 +35,23 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>file.name</td>
-              <td>file.file.size</td>
-              <td>
-                file.uploadPercent
+            <tr *ngFor="let file of files">
+              <td>{{ file.name }}</td>
+              <td>{{ file.file.size / 1024 / 1024 | number: ".2.2" }}MB</td>
+              <td *ngIf="file.uploadPercent | async as uploadPercent">
                 <div class="progress">
-                  <div class="progress-bar">
-                    role="progessbar" uploadPercent %
+                  <div
+                    class="progress-bar"
+                    role="progessbar"
+                    [ngStyle]="{ width: uploadPercent + '%' }"
+                  >
+                    {{ uploadPercent | number: "1.0-0" }} %
                   </div>
                 </div>
               </td>
-              <td>file.downloadURL</td>
+              <td *ngIf="file.downloadURL | async as downloadURL">
+                <a [href]="downloadURL" target="_blank">Download URL</a>
+              </td>
             </tr>
           </tbody>
         </table>
