@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { AngularFireStorage } from '@angular/fire/storage/storage';
+import { AngularFireStorage } from '@angular/fire/storage';
 import { finalize } from 'rxjs/operators';
 
 import { FileItem } from '@shared/upload-image/models/file-item';

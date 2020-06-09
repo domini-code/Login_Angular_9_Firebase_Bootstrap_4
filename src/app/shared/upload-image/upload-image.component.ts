@@ -1,14 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
+import { StorageService } from '@shared/upload-image/services/storage.service';
+import { FileItem } from '@shared/upload-image/models/file-item';
 @Component({
   selector: 'app-upload-image',
   templateUrl: './upload-image.component.html',
   styleUrls: ['./upload-image.component.scss'],
+  providers: [StorageService],
 })
-export class UploadImageComponent implements OnInit {
-  constructor() {}
+export class UploadImageComponent {
+  files: FileItem[] = [];
+  isOverDrop = false;
 
-  ngOnInit(): void {}
+  constructor(private readonly storageSvc: StorageService) {}
 
-  onUpload() {}
+  onUpload(): void {
+    this.storageSvc.uploadImage(this.files);
+  }
 }
